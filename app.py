@@ -2,6 +2,7 @@ import streamlit as st
 import zipfile
 import tempfile
 from pathlib import Path
+from ocr import ocr_space_file, extract_text
 
 
 st.set_page_config(
@@ -77,9 +78,13 @@ if st.button("🚀 Start OCR", type="primary"):
                     f"Processing {i + 1}/{len(images)}: `{image.name}`"
                 )
 
-                # OCR will go here
-                # result = ocr_space_file(image)
+                result = ocr_space_file(image)
 
+                text = extract_text(result)
+                
+                # Parser will go here later
+                # row = parse_cacti(text)
+                
                 progress.progress(
                     (i + 1) / len(images)
                 )
